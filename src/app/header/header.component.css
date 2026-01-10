@@ -1,0 +1,32 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+header{
+    background-color: antiquewhite;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.header-content{
+   display: flex;
+    gap: 20px;
+    font-size: 10px;
+    flex-direction: column;
+
+}
+nav{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+img{
+    mix-blend-mode: multiply;
+}

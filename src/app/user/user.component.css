@@ -1,0 +1,23 @@
+button{
+    border: none;
+    background-color:aqua;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+    width: 150px;
+    height: 40px;
+    display: flex;
+}
+
+img {
+  width: 30px;
+  height: 30px;
+  object-fit: cover; /* key */
+  border-radius: 50%;
+}
+span {
+  margin-left: 10px;
+  font-weight: bold;
+  font-size: 10px;
+  align-self: center;
+}
