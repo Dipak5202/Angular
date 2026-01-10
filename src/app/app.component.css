@@ -1,0 +1,7 @@
+main{
+    display: flex;
+}
+
+app-tasks {
+    padding-left: 10px;
+}
