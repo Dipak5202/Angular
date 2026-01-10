@@ -12,13 +12,15 @@ const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 })
 export class UserComponent {
 
-  /**
+    /**
    * @Input decorator to receive data from parent component  (Parent to child communication)
    * required: true  --> to make input property mandatory to be provided by parent component
   */
-  @Input({required: true}) id!: string;
-  @Input({required: true}) avatar!: string;
-  @Input({required: true}) name!: string;
+  @Input({required: true}) user!:{
+    id: string;
+    name: string;
+    avatar: string;
+  }
 
   /*
     - EventEmitter
@@ -32,12 +34,40 @@ export class UserComponent {
   onSelectedUser() {
     //emitting event to parent component
     // sendng id of selected user to parent component
-    this.select.emit(this.id);
+    this.select.emit(this.user.id);
   }
   get imagePath() {
     //to get data from signal
-    return 'assets/users/' + this.avatar;
+    return 'assets/users/' + this.user.avatar;
   }
+
+  //======================================== Traditional Input and Output Property ===================================================
+  // /**
+  //  * @Input decorator to receive data from parent component  (Parent to child communication)
+  //  * required: true  --> to make input property mandatory to be provided by parent component
+  // */
+  // @Input({required: true}) id!: string;
+  // @Input({required: true}) avatar!: string;
+  // @Input({required: true}) name!: string;
+
+  // /*
+  //   - EventEmitter
+  //   * @Output decorator to send data to parent component (Child to Parent communication)
+  //   - EventEmitter is used to emit events from child component to parent component
+  //   - creating own custom event
+  // */
+  // @Output() select = new EventEmitter<string>();
+
+  // //On click this method will be called
+  // onSelectedUser() {
+  //   //emitting event to parent component
+  //   // sendng id of selected user to parent component
+  //   this.select.emit(this.id);
+  // }
+  // get imagePath() {
+  //   //to get data from signal
+  //   return 'assets/users/' + this.avatar;
+  // }
 
 
   //======================================== Signal as Output Property ===================================================

@@ -1,25 +1,20 @@
 <app-header></app-header>
 
-
-
 <main>
     <ul>
-        <li>
-            <app-user
-                [avatar]="users[0].avatar"
-                [name]="users[0].name"
-                [id]="users[0].id"
-                (select)="OnSelectedUser($event)"
-            ></app-user>
-        </li>
-        <li>
-            <app-user
-                [avatar]="users[1].avatar"
-                [name]="users[1].name"
-                [id]="users[1].id"
-                (select)="OnSelectedUser($event)"
-            ></app-user>
-        </li>
+        @for (user of users; track user.id){
+            <li>
+                <app-user
+                    [user]="user"
+                    (select)="OnSelectedUser($event)"
+                ></app-user>
+            </li>
+        }
     </ul>
-    <app-tasks [name]="selectedUser?.name"></app-tasks>
-</main>
+    @if (selectedUser) {
+        <app-tasks [name]="selectedUser.name"></app-tasks>
+    }@else {
+        <p>Please Select a User</p> 
+    }
+    
+</main> 

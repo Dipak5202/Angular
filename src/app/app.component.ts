@@ -14,7 +14,7 @@ export class AppComponent {
   title = 'App';
   users = DUMMY_USERS
 
-  selectedUserId = 'u1';
+  selectedUserId?: string;
   //handler for selected user event emitted from UserComponent (from child to parent)
   OnSelectedUser(userId: string) {
     this.selectedUserId = userId;
