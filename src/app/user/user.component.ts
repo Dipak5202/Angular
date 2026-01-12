@@ -1,8 +1,10 @@
 import { Component, computed, EventEmitter, input, Input, output, Output, signal } from '@angular/core';
 import { DUMMY_USERS } from '../dummy-users';
+import { type User } from './user.model';
 
 
 const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
+
 @Component({
   selector: 'app-user',
   standalone: true,
@@ -16,11 +18,8 @@ export class UserComponent {
    * @Input decorator to receive data from parent component  (Parent to child communication)
    * required: true  --> to make input property mandatory to be provided by parent component
   */
-  @Input({required: true}) user!:{
-    id: string;
-    name: string;
-    avatar: string;
-  }
+  @Input({required: true}) user!:User
+  @Input({required: true}) selected!:boolean
 
   /*
     - EventEmitter

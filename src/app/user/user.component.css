@@ -21,3 +21,7 @@ span {
   font-size: 10px;
   align-self: center;
 }
+
+.active{
+  background-color: rgb(49, 104, 139);
+}
