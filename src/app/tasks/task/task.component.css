@@ -1,0 +1,23 @@
+article{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.actions {
+    margin-top: auto;
+    text-align: right;
+    padding: 15px;
+}
+
+button{
+    cursor: pointer;
+    padding: 8px 12px;
+ 
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    font-size: 14px;
+}
