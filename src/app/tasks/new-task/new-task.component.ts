@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Output, signal } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NewTask } from '../../types.model';
+import { TasksService } from '../tasks.service';
 
 @Component({
   selector: 'app-new-task',
@@ -9,8 +10,8 @@ import { NewTask } from '../../types.model';
   styleUrl: './new-task.component.css'
 })
 export class NewTaskComponent {
-  @Output() cancel = new EventEmitter();
-  @Output() add = new EventEmitter<NewTask>();
+  @Output() close = new EventEmitter();
+  @Input({required: true}) userId!: string;
   /*-- Two way binding --
     for getting user input from form fields
     binding input fields to these properties
@@ -23,12 +24,16 @@ export class NewTaskComponent {
   enteredSummary = '';
   enteredDueDate = '';
 
+  // inject TasksService
+  //alternative to constructor injection
+  private tasksService = inject(TasksService);
+
   //  enteredTitle = signal('');
   // enteredSummary = signal('');
   // enteredDueDate = signal('');
 
   onCancel() {
-    this.cancel.emit();
+    this.close.emit();
   }
 
   OnSubmit(){
@@ -37,6 +42,7 @@ export class NewTaskComponent {
       summary: this.enteredSummary,
       dueDate: this.enteredDueDate
     };
-    this.add.emit(newTask);
+    this.tasksService.addTask(newTask, this.userId);
+    this.close.emit();
   }
 }

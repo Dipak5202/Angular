@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { TaskComponent } from "./task/task.component";
 import { NewTaskComponent } from "./new-task/new-task.component";
 import { type NewTask } from '../types.model';
+import { TasksService } from './tasks.service';
 
 @Component({
   selector: 'app-tasks',
@@ -16,39 +17,29 @@ export class TasksComponent {
   @Input({required: true}) name!: string;
     // @Input() name: string | undefined;
 
+  // if dont want to share service instance across app
+  // then create service instance here
+  // private tasksService = new TasksService();
   isAddingTask = false;
-  tasks = [
-    { id: 't1',userId:'u1', title: 'Task One', summary: 'This is the first task.',dueDate:'2025-12-31' },
-    { id: 't2',userId:'u2', title: 'Task Two', summary: 'This is the second task.',dueDate:'2025-12-31' },
-    { id: 't3',userId:'u3', title: 'Task Three', summary: 'This is the third task.',dueDate:'2025-12-31' }
-  ];
 
-  get seelctedUserTasks() { 
-    return this.tasks.filter(task => task.userId === this.userId);
-  }
+  //if want to share service instance across app
+  // then inject service via constructor
+  constructor(private tasksService: TasksService){}
 
-  onCompleteTask(taskId: string) {
-    this.tasks = this.tasks.filter(task => task.id !== taskId);
+  get selectedUserTasks() {
+    return this.tasksService.getTasksByUserId(this.userId);
   }
 
   onStartAddTask() {
     this.isAddingTask = true;
   }
 
-  onCancelAddTask() {
+  onCloseAddTask() {
     this.isAddingTask = false;
   }
 
   onAddTask(newTask: NewTask) {
-    const generatedId = 't' + (this.tasks.length + 1);
-    const task = {
-      id: generatedId,
-      userId: this.userId,
-      title: newTask.title,
-      summary: newTask.summary,
-      dueDate: newTask.dueDate
-    };
-    this.tasks.unshift(task);
+    this.tasksService.addTask(newTask, this.userId);
     this.isAddingTask = false;
   }
 }

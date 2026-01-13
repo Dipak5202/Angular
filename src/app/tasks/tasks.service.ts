@@ -1,4 +1,10 @@
+import { Injectable } from "@angular/core";
+import { NewTask } from "../types.model";
 
+
+@Injectable({
+    providedIn: 'root' //service available application wide
+})
 export class TasksService {
     //Only accessible within this service
     private tasks = [
@@ -10,4 +16,21 @@ export class TasksService {
   getTasksByUserId(userId: string) {
     return this.tasks.filter(task => task.userId === userId);
   }
-} 
+
+  addTask(task: NewTask, userId: string) {
+    const generatedId = 't' + (this.tasks.length + 1);
+    const newTask = {
+      id: generatedId,
+      userId: userId,
+      title: task.title,
+      summary: task.summary,
+      dueDate: task.dueDate
+    };
+    this.tasks.unshift(newTask);
+  }
+
+  removeTask(taskId: string) {
+    this.tasks = this.tasks.filter(task => task.id !== taskId);
+  }
+
+}
