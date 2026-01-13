@@ -1,9 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { TaskComponent } from "./task/task.component";
 import { NewTaskComponent } from "./new-task/new-task.component";
+import { type NewTask } from '../types.model';
 
 @Component({
   selector: 'app-tasks',
+  standalone: true,
   imports: [TaskComponent, NewTaskComponent],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css'
@@ -37,4 +39,17 @@ export class TasksComponent {
     this.isAddingTask = false;
   }
 
+  onAddTask(newTask: NewTask) {
+    const generatedId = 't' + (this.tasks.length + 1);
+    const task = {
+      id: generatedId,
+      userId: this.userId,
+      title: newTask.title,
+      summary: newTask.summary,
+      dueDate: newTask.dueDate
+    };
+    this.tasks.unshift(task);
+    this.isAddingTask = false;
+  }
 }
+ 
