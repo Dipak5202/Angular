@@ -3,6 +3,8 @@ article{
     flex-direction: column;
     border: 1px solid #ddd;
     border-radius: 4px;
+    background-color: bisque;
+    padding-left: 10px;
 }
 
 .actions {

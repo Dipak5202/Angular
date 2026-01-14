@@ -1,7 +1,19 @@
 main{
     display: flex;
+    justify-content: center;
+    padding: 10px;
 }
 
 app-tasks {
     padding-left: 10px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li{
+    margin-bottom: 5px;
 }
